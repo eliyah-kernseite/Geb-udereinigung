@@ -23,7 +23,7 @@ PHOTOS = {
     'bodenreinigung': 'bueroflaeche-boden',
     'sonderreinigung': 'bodenreinigung-maschine',
 }
-WIDTHS = [480, 768, 1200, 1536]
+WIDTHS = [640, 960, 1440]
 
 for src, name in PHOTOS.items():
     im = Image.open(SRC / f'{src}.webp').convert('RGB')
@@ -32,13 +32,13 @@ for src, name in PHOTOS.items():
             continue
         h = round(im.height * w / im.width)
         im.resize((w, h), Image.LANCZOS).save(OUT / f'{name}-{w}.webp', 'WEBP', quality=74, method=6)
-    if im.width not in WIDTHS:
+    if im.width not in WIDTHS and im.width < WIDTHS[-1]:
         im.save(OUT / f'{name}-{im.width}.webp', 'WEBP', quality=74, method=6)
 
 # Logo: weiße Schrift auf transparentem Grund, für dunkle Flächen.
 logo = Image.open(SRC / 'logo.webp').convert('RGBA')
 logo = logo.crop(logo.getbbox())
-for w in (180, 360):
+for w in (100, 200, 300):
     h = round(logo.height * w / logo.width)
     logo.resize((w, h), Image.LANCZOS).save(OUT / f'logo-{w}.webp', 'WEBP', quality=90, method=6)
 print('logo', logo.size)

@@ -1,158 +1,189 @@
-// König Gebäudereinigung – Menü, Einblenden, Darstellung anpassen, Anfrageformular.
+// König Gebäudereinigung: Menü, Einblenden beim Scrollen, A11y-Schalter, Anfrageformular.
 // Ohne JavaScript bleiben alle Inhalte sichtbar und alle Links nutzbar.
-(() => {
-  const root = document.documentElement;
-  const motionOk = () => !matchMedia('(prefers-reduced-motion: reduce)').matches && root.dataset.motion !== 'reduziert';
+const root = document.documentElement;
+const desktop = matchMedia('(min-width: 64rem)');
+root.classList.add('js'); // setzt a11y-init.js schon im <head>, hier nur zur Sicherheit
 
-  // Mobiles Menü
+function initHeader() {
+  const header = document.querySelector('.header');
+  if (!header) return;
+  const onScroll = () => header.classList.toggle('is-scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+// Mobiles Menü: Escape schließt, Fokus bleibt im Menü, Seite scrollt nicht mit.
+function initMenu() {
   const menu = document.querySelector('.menu');
   const nav = document.getElementById('navigation');
-  const header = document.querySelector('.header');
-  if (menu && nav && header) {
-    menu.hidden = false;
-    const setOffset = () => root.style.setProperty('--header-bottom', `${Math.max(0, header.getBoundingClientRect().bottom)}px`);
-    const toggle = open => {
-      menu.setAttribute('aria-expanded', String(open));
-      menu.querySelector('.menu-label').textContent = open ? 'Schließen' : 'Menü';
-      nav.classList.toggle('is-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-      if (open) setOffset();
-    };
-    menu.addEventListener('click', () => toggle(menu.getAttribute('aria-expanded') !== 'true'));
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') { toggle(false); menu.focus(); }
-    });
-    nav.addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });
-    matchMedia('(min-width: 1024px)').addEventListener('change', e => { if (e.matches) toggle(false); });
-  }
+  if (!menu || !nav) return;
+  menu.hidden = false;
+  const label = menu.querySelector('.menu-label');
+  const isOpen = () => menu.getAttribute('aria-expanded') === 'true';
+  const toggle = (open, focusMenu = false) => {
+    menu.setAttribute('aria-expanded', String(open));
+    label.textContent = open ? 'Schließen' : 'Menü';
+    nav.classList.toggle('is-open', open);
+    document.body.classList.toggle('menu-open', open);
+    if (open) nav.querySelector('a')?.focus();
+    else if (focusMenu) menu.focus();
+  };
+  menu.addEventListener('click', () => toggle(!isOpen()));
+  document.addEventListener('keydown', e => {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') { toggle(false, true); return; }
+    if (e.key !== 'Tab') return;
+    const items = [menu, ...nav.querySelectorAll('a, button')].filter(el => el.offsetParent !== null);
+    const first = items[0], last = items.at(-1);
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  nav.addEventListener('click', e => { if (e.target.closest('a') && isOpen()) toggle(false); });
+  desktop.addEventListener('change', e => { if (e.matches && isOpen()) toggle(false); });
 
-  // Sanftes Einblenden beim Scrollen. Der versteckte Zustand wird erst hier gesetzt.
-  const items = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window && items.length && motionOk()) {
-    root.classList.add('reveal-armed');
-    const io = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
-      }
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-    items.forEach(el => {
-      if (el.getBoundingClientRect().top < innerHeight) el.classList.add('is-visible');
-      else io.observe(el);
+  // Untermenüs mobil aufklappbar
+  nav.querySelectorAll('.sub-toggle').forEach(btn => {
+    btn.hidden = false;
+    const sub = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      sub.classList.toggle('is-open', open);
     });
-  }
+  });
+}
 
-  // Darstellung anpassen: Textgröße, Kontrast, Bewegung. Nur lokal im Browser gespeichert.
-  const KEY = 'koenig-darstellung';
-  const SIZES = [1, 1.125, 1.25];
+// Sanftes Einblenden. Was beim Laden schon sichtbar ist, erscheint sofort.
+function initReveal() {
+  const items = [...document.querySelectorAll('[data-reveal]')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches || root.dataset.a11yMotion === 'reduced';
+  if (reduced || !('IntersectionObserver' in window)) { items.forEach(el => el.classList.add('is-visible')); return; }
+  items.forEach(el => { if (el.getBoundingClientRect().top < innerHeight) el.classList.add('is-visible'); });
+  root.classList.add('reveal-on');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const siblings = [...el.parentElement.children].filter(c => c.hasAttribute('data-reveal'));
+      el.style.transitionDelay = `${Math.min(siblings.indexOf(el), 3) * 80}ms`;
+      el.classList.add('is-visible');
+      io.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  items.filter(el => !el.classList.contains('is-visible')).forEach(el => io.observe(el));
+}
+
+function initA11y() {
   const dock = document.querySelector('[data-a11y]');
-  if (dock) {
-    const read = () => {
-      try {
-        const s = JSON.parse(localStorage.getItem(KEY)) || {};
-        return { size: SIZES.includes(Number(s.size)) ? Number(s.size) : 1, contrast: s.contrast === true, motion: s.motion === true };
-      } catch { return { size: 1, contrast: false, motion: false }; }
-    };
-    let state = read();
-    const toggleBtn = dock.querySelector('[data-a11y-toggle]');
-    const panel = dock.querySelector('[data-a11y-panel]');
-    const status = dock.querySelector('[data-a11y-status]');
-    const contrastBtn = dock.querySelector('[data-a11y-contrast]');
-    const motionBtn = dock.querySelector('[data-a11y-motion]');
-    const sizeBtns = [...dock.querySelectorAll('[data-a11y-size]')];
-    const apply = () => {
-      if (state.size > 1) root.style.setProperty('--scale', state.size); else root.style.removeProperty('--scale');
-      if (state.contrast) root.dataset.contrast = 'hoch'; else delete root.dataset.contrast;
-      if (state.motion) { root.dataset.motion = 'reduziert'; root.classList.remove('reveal-armed'); } else delete root.dataset.motion;
-      contrastBtn.setAttribute('aria-pressed', String(state.contrast));
-      motionBtn.setAttribute('aria-pressed', String(state.motion));
-      sizeBtns.forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.a11ySize) === state.size)));
-      try {
-        if (state.size === 1 && !state.contrast && !state.motion) localStorage.removeItem(KEY);
-        else localStorage.setItem(KEY, JSON.stringify(state));
-      } catch { /* Speicher gesperrt: Einstellung gilt nur für diesen Seitenaufruf. */ }
-    };
-    const say = text => { status.textContent = ''; setTimeout(() => { status.textContent = text; }, 50); };
-    const open = show => {
-      panel.hidden = !show;
-      toggleBtn.setAttribute('aria-expanded', String(show));
-      if (show) panel.querySelector('button').focus();
-    };
-    apply();
-    toggleBtn.addEventListener('click', () => open(panel.hidden));
-    dock.querySelector('[data-a11y-close]').addEventListener('click', () => { open(false); toggleBtn.focus(); });
-    dock.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { open(false); toggleBtn.focus(); } });
-    document.addEventListener('click', e => { if (!panel.hidden && !dock.contains(e.target)) open(false); });
-    sizeBtns.forEach(b => b.addEventListener('click', () => { state.size = Number(b.dataset.a11ySize); apply(); say(`Textgröße: ${b.textContent}`); }));
-    contrastBtn.addEventListener('click', () => { state.contrast = !state.contrast; apply(); say(state.contrast ? 'Hoher Kontrast an' : 'Hoher Kontrast aus'); });
-    motionBtn.addEventListener('click', () => { state.motion = !state.motion; apply(); say(state.motion ? 'Bewegungen reduziert' : 'Bewegungen wieder an'); });
-    dock.querySelector('[data-a11y-reset]').addEventListener('click', () => { state = { size: 1, contrast: false, motion: false }; apply(); say('Darstellung zurückgesetzt'); });
-  }
+  if (!dock) return;
+  const KEY = 'site-a11y', SIZES = [1, 1.125, 1.25];
+  const $ = (s) => dock.querySelector(s);
+  const panel = $('#a11y-panel'), toggle = $('.a11y-toggle'), status = $('[data-a11y-status]');
+  const sizeBtns = [...dock.querySelectorAll('[data-a11y-size]')];
+  let state = { size: 1, contrast: false, motion: false };
+  try { const s = JSON.parse(localStorage.getItem(KEY) || '{}');
+    state = { size: SIZES.includes(+s.size) ? +s.size : 1, contrast: s.contrast === true, motion: s.motion === true };
+  } catch {}
+  const save = (msg) => {
+    root.style.setProperty('--a11y-scale', String(state.size));
+    if (state.contrast) root.dataset.a11yContrast = 'high'; else delete root.dataset.a11yContrast;
+    if (state.motion) root.dataset.a11yMotion = 'reduced'; else delete root.dataset.a11yMotion;
+    if (msg) { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {} }
+    $('[data-a11y-contrast]').setAttribute('aria-pressed', state.contrast);
+    $('[data-a11y-motion]').setAttribute('aria-pressed', state.motion);
+    sizeBtns.forEach((b) => b.setAttribute('aria-pressed', +b.dataset.a11ySize === state.size));
+    if (msg) status.textContent = msg;
+  };
+  const open = () => { panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); panel.querySelector('button').focus(); };
+  const close = (focus) => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); if (focus) toggle.focus(); };
+  toggle.addEventListener('click', () => (panel.hidden ? open() : close()));
+  $('[data-a11y-close]').addEventListener('click', () => close(true));
+  $('[data-a11y-contrast]').addEventListener('click', () => { state.contrast = !state.contrast; save(state.contrast ? 'Hoher Kontrast an.' : 'Hoher Kontrast aus.'); });
+  $('[data-a11y-motion]').addEventListener('click', () => { state.motion = !state.motion; save(state.motion ? 'Bewegungen reduziert.' : 'Bewegungen erlaubt.'); });
+  sizeBtns.forEach((b) => b.addEventListener('click', () => { state.size = +b.dataset.a11ySize; save(`Textgröße: ${b.textContent.trim()}.`); }));
+  $('[data-a11y-reset]').addEventListener('click', () => { state = { size: 1, contrast: false, motion: false }; save('Einstellungen zurückgesetzt.'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) close(true); });
+  document.addEventListener('pointerdown', (e) => { if (!panel.hidden && !dock.contains(e.target)) close(); });
+  save();
+}
 
-  // Anfrageformular: prüft Pflichtfelder, sendet über Web3Forms oder öffnet einen E-Mail-Entwurf.
+// Anfrageformular: prüft Pflichtfelder, sendet über Web3Forms (wenn ein Schlüssel gesetzt ist)
+// oder öffnet einen vorbereiteten E-Mail-Entwurf.
+function initForm() {
   const form = document.querySelector('[data-contact-form]');
-  if (form) {
-    const email = form.dataset.email;
-    const key = form.dataset.key;
-    const status = form.querySelector('[data-form-status]');
-    const labels = { name: 'Name', firma: 'Firma', email: 'E-Mail', telefon: 'Telefon', leistung: 'Leistung', haeufigkeit: 'Häufigkeit', ort: 'Ort des Objekts', flaeche: 'Fläche', nachricht: 'Nachricht' };
-    const messages = { name: 'Bitte geben Sie Ihren Namen an.', email: 'Bitte geben Sie eine gültige E-Mail-Adresse an, zum Beispiel name@firma.de.', nachricht: 'Bitte beschreiben Sie kurz Ihr Anliegen.' };
-    const clear = field => {
-      field.removeAttribute('aria-invalid');
-      const err = document.getElementById(`${field.id}-fehler`);
-      if (err) err.remove();
-      field.setAttribute('aria-describedby', (field.getAttribute('aria-describedby') || '').replace(`${field.id}-fehler`, '').trim());
-      if (!field.getAttribute('aria-describedby')) field.removeAttribute('aria-describedby');
-    };
-    const flag = field => {
-      clear(field);
-      const p = document.createElement('p');
-      p.className = 'field-error';
-      p.id = `${field.id}-fehler`;
-      p.textContent = messages[field.name];
-      field.insertAdjacentElement('afterend', p);
-      field.setAttribute('aria-invalid', 'true');
-      field.setAttribute('aria-describedby', `${p.id} ${field.getAttribute('aria-describedby') || ''}`.trim());
-    };
-    form.querySelectorAll('[required]').forEach(f => f.addEventListener('input', () => { if (f.checkValidity()) clear(f); }));
-    const show = (html, error = false) => { status.innerHTML = `<div class="box${error ? ' error' : ''}">${html}</div>`; };
-    const body = data => Object.entries(labels).map(([k, l]) => data.get(k) ? `${l}: ${data.get(k)}` : '').filter(Boolean).join('\n');
-    const mailto = data => `mailto:${email}?subject=${encodeURIComponent(`Anfrage über die Website${data.get('leistung') ? `: ${data.get('leistung')}` : ''}`)}&body=${encodeURIComponent(body(data))}`;
+  if (!form) return;
+  const { email, key } = form.dataset;
+  const status = form.querySelector('[data-form-status]');
+  const labels = { name: 'Name', firma: 'Firma', email: 'E-Mail', telefon: 'Telefon', leistung: 'Leistung', haeufigkeit: 'Häufigkeit', ort: 'Ort des Objekts', flaeche: 'Fläche', nachricht: 'Nachricht' };
+  const messages = { name: 'Bitte geben Sie Ihren Namen an.', email: 'Bitte geben Sie eine gültige E-Mail-Adresse an, zum Beispiel name@firma.de.', nachricht: 'Bitte beschreiben Sie kurz Ihr Anliegen.' };
+  const describedBy = (field, add, remove) => {
+    const ids = new Set((field.getAttribute('aria-describedby') || '').split(' ').filter(Boolean));
+    if (remove) ids.delete(remove);
+    if (add) ids.add(add);
+    if (ids.size) field.setAttribute('aria-describedby', [...ids].join(' ')); else field.removeAttribute('aria-describedby');
+  };
+  const clear = field => {
+    field.removeAttribute('aria-invalid');
+    document.getElementById(`${field.id}-fehler`)?.remove();
+    describedBy(field, null, `${field.id}-fehler`);
+  };
+  const flag = field => {
+    clear(field);
+    const p = document.createElement('p');
+    p.className = 'field-error';
+    p.id = `${field.id}-fehler`;
+    p.textContent = messages[field.name];
+    field.insertAdjacentElement('afterend', p);
+    field.setAttribute('aria-invalid', 'true');
+    describedBy(field, p.id);
+  };
+  const required = [...form.querySelectorAll('[required]')];
+  required.forEach(f => f.addEventListener('input', () => { if (f.checkValidity()) clear(f); }));
+  const show = (html, error = false) => { status.innerHTML = `<div class="box${error ? ' error' : ''}">${html}</div>`; };
+  const subject = data => `Anfrage über die Website${data.get('leistung') ? `: ${data.get('leistung')}` : ''}`;
+  const body = data => Object.entries(labels).map(([k, l]) => data.get(k) ? `${l}: ${data.get(k)}` : '').filter(Boolean).join('\n');
+  const mailto = data => `mailto:${email}?subject=${encodeURIComponent(subject(data))}&body=${encodeURIComponent(body(data))}`;
 
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      const invalid = [...form.querySelectorAll('[required]')].filter(f => !f.value.trim() || !f.checkValidity());
-      form.querySelectorAll('[required]').forEach(f => (invalid.includes(f) ? flag(f) : clear(f)));
-      if (invalid.length) {
-        show(`<p>Bitte prüfen Sie ${invalid.length === 1 ? 'das markierte Feld' : `die ${invalid.length} markierten Felder`}.</p>`, true);
-        invalid[0].focus();
-        return;
-      }
-      const data = new FormData(form);
-      if (data.get('botcheck')) return;
-      if (!key) {
-        const href = mailto(data);
-        show(`<p><strong>Fast geschafft.</strong> Ihr E-Mail-Programm öffnet sich mit Ihrer Anfrage. Bitte senden Sie die E-Mail dort ab.</p><p>Es öffnet sich nichts? <a href="${href.replaceAll('"', '&quot;')}">E-Mail-Entwurf erneut öffnen</a> oder schreiben Sie direkt an <a href="mailto:${email}">${email}</a>.</p>`);
-        location.href = href;
-        return;
-      }
-      const button = form.querySelector('button[type="submit"]');
-      button.disabled = true;
-      show('<p>Ihre Anfrage wird gesendet …</p>');
-      data.set('access_key', key);
-      data.append('subject', `Anfrage über die Website${data.get('leistung') ? `: ${data.get('leistung')}` : ''}`);
-      data.append('from_name', 'Website König Gebäudereinigung');
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
-        const json = await res.json();
-        if (!res.ok || !json.success) throw new Error(json.message || 'Fehler');
-        form.reset();
-        show('<p><strong>Vielen Dank für Ihre Anfrage.</strong> Wir melden uns so bald wie möglich bei Ihnen.</p>');
-      } catch {
-        show(`<p>Die Anfrage konnte gerade nicht gesendet werden. Bitte <a href="${mailto(data).replaceAll('"', '&quot;')}">senden Sie sie per E-Mail</a> oder rufen Sie uns an.</p>`, true);
-      } finally {
-        button.disabled = false;
-        status.focus?.();
-      }
-    });
-  }
-})();
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const invalid = required.filter(f => !f.value.trim() || !f.checkValidity());
+    required.forEach(f => (invalid.includes(f) ? flag(f) : clear(f)));
+    if (invalid.length) {
+      show(`<p>Bitte prüfen Sie ${invalid.length === 1 ? 'das markierte Feld' : `die ${invalid.length} markierten Felder`}.</p>`, true);
+      invalid[0].focus();
+      return;
+    }
+    const data = new FormData(form);
+    if (data.get('botcheck')) return;
+    if (!key) {
+      const href = mailto(data);
+      show(`<p><strong>Fast geschafft.</strong> Ihr E-Mail-Programm öffnet sich mit Ihrer Anfrage. Bitte senden Sie die E-Mail dort ab.</p><p>Es öffnet sich nichts? <a href="${href.replaceAll('"', '&quot;')}">E-Mail-Entwurf erneut öffnen</a> oder schreiben Sie direkt an <a href="mailto:${email}">${email}</a>.</p>`);
+      location.href = href;
+      return;
+    }
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    show('<p>Ihre Anfrage wird gesendet.</p>');
+    data.set('access_key', key);
+    data.set('subject', subject(data));
+    data.set('from_name', 'Website König Gebäudereinigung');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || 'Fehler');
+      form.reset();
+      show('<p><strong>Vielen Dank für Ihre Anfrage.</strong> Wir melden uns so bald wie möglich bei Ihnen.</p>');
+    } catch {
+      show(`<p>Die Anfrage konnte gerade nicht gesendet werden. Bitte <a href="${mailto(data).replaceAll('"', '&quot;')}">senden Sie sie per E-Mail</a> oder rufen Sie uns an.</p>`, true);
+    } finally {
+      button.disabled = false;
+      status.focus();
+    }
+  });
+}
+
+initHeader();
+initMenu();
+initReveal();
+initA11y();
+initForm();

@@ -1,101 +1,103 @@
-# König Gebäudereinigung – Website
+# König Gebäudereinigung: Website
 
-Statische Website für König Gebäudereinigung (Inhaber Leart Spahiu, Würzburg),
-umgesetzt von KERNSEITE. Die HTML-Seiten werden aus gemeinsamen Vorlagen erzeugt;
-auf dem Webserver wird weder Node noch PHP noch eine Datenbank benötigt.
+Statische Website für König Gebäudereinigung (Inhaber Leart Spahiu, Würzburg), gebaut von
+KERNSEITE nach dem KERNSEITE-Website-Bauplan. Ein kleines Node-Skript erzeugt alle Seiten aus
+gemeinsamen Vorlagen. Auf dem Webserver laufen weder Node noch PHP noch eine Datenbank.
 
 Ziel-Adresse: **https://www.koenig-gebaeudereinigung.com/** (löst die bisherige WordPress-Seite ab).
 
-## Bearbeiten, bauen, prüfen
+## Entwicklung
 
-Node.js ab 22.12, keine weiteren Pakete nötig:
+Node.js ab 22.12. Einzige Entwicklungsabhängigkeit ist `jsdom` für die Tests.
 
 ```sh
-npm run build   # erzeugt alle Seiten, sitemap.xml und robots.txt
-npm test        # prüft Titel, Beschreibungen, Überschriften, Alttexte, Links, doppelte Texte
-npm run serve   # Vorschau unter http://localhost:4173/
+npm install     # einmalig, nur für die Tests
+npm run build   # erzeugt alle .html-Seiten, sitemap.xml und robots.txt
+npm test        # Abnahme-Checkliste aus dem Bauplan (Abschnitt 14)
+npm run serve   # Vorschau unter http://localhost:4173/ (saubere Adressen wie /kontakt)
 ```
 
-Nach jeder Textänderung neu bauen und die erzeugten HTML-Dateien mit committen.
+Nach jeder Änderung neu bauen und die erzeugten HTML-Dateien mit committen.
 
 | Datei | Inhalt |
 | --- | --- |
-| `src/site.mjs` | Firmendaten: Name, Anschrift, Telefon, E-Mail, Hoster, Formular-Schlüssel |
-| `src/pages.mjs` | Startseite, Leistungen, fünf Leistungsseiten, Über uns, Häufige Fragen, Kontakt, 404 |
-| `src/legal.mjs` | Impressum, Datenschutz, Barrierefreiheit |
-| `src/layout.mjs` | Kopf, Navigation, Fußzeile, Metadaten, strukturierte Daten, Fotoliste mit Alttexten |
-| `assets/site.css`, `assets/site.js` | Gestaltung und Bedienung (Menü, Darstellung anpassen, Formular) |
-| `scripts/images.py` | Erzeugt die Bildgrößen aus `assets-source/` (Pillow) |
-| `tests/site.test.mjs` | Automatische SEO- und Strukturprüfung |
-| `docs/FREIGABE.md` | Aussagen und Angaben, die der Inhaber vor dem Livegang bestätigen sollte |
+| `src/config.mjs` | Firmendaten, Erreichbarkeit, Google-Profil und Bewertungen, Formular-Schlüssel, Hoster, `live` |
+| `src/layout.mjs` | `<head>`, Header, Brotkrümel, Kontaktblock, Footer, JSON-LD, A11y-Schalter, Fotoliste mit Alt-Texten |
+| `src/pages.mjs` | Startseite (Variante B), Leistungen, fünf Leistungsseiten, Ablauf, Über uns, Häufige Fragen, Kontakt, 404 |
+| `src/legal.mjs` | Impressum, Datenschutz, Barrierefreiheit, Bildnachweise |
+| `assets/site.css` | Gestaltung mit Design-Tokens |
+| `assets/site.js` | Menü, Einblenden beim Scrollen, A11y-Schalter, Formular |
+| `assets/a11y-init.js` | Wendet gespeicherte A11y-Einstellungen vor dem ersten Bild an |
+| `assets/fonts/` | Inter und Playfair Display als woff2, Lizenz in `OFL.txt` |
+| `scripts/images.py` | Erzeugt WebP in 640, 960 und 1440 px aus `assets-source/` (Pillow) |
+| `docs/FREIGABE.md` | Offen-Liste: Angaben, die der Kunde liefern oder bestätigen muss |
 
 ## Seiten und Adressen
 
-Alle Seiten liegen als Ordner mit `index.html`, damit die Adressen sauber sind und
-mit der alten WordPress-Seite übereinstimmen (`/kontakt/`, `/ueber-uns/`, `/impressum/`,
-`/datenschutz/` bleiben gleich, es gehen keine Google-Einträge verloren).
+Alle Seiten liegen als `.html` im Hauptordner. Links stehen ohne Endung (`/kontakt`), die
+`.htaccess` liefert die Datei aus und leitet die alten WordPress-Adressen mit Schrägstrich
+(`/kontakt/`, `/ueber-uns/`, `/impressum/`, `/datenschutz/`) per 301 auf die neue Form um.
 
-`/` · `/leistungen/` · `/bueroreinigung-wuerzburg/` · `/praxisreinigung-wuerzburg/` ·
-`/treppenhausreinigung-wuerzburg/` · `/glasreinigung-wuerzburg/` · `/grundreinigung-wuerzburg/` ·
-`/ueber-uns/` · `/haeufige-fragen/` · `/kontakt/` · `/impressum/` · `/datenschutz/` · `/barrierefreiheit/`
+`/` · `/leistungen` · `/bueroreinigung-wuerzburg` · `/praxisreinigung-wuerzburg` ·
+`/treppenhausreinigung-wuerzburg` · `/glasreinigung-wuerzburg` · `/grundreinigung-wuerzburg` ·
+`/ablauf` · `/ueber-uns` · `/haeufige-fragen` · `/kontakt` · `/impressum` · `/datenschutz` ·
+`/barrierefreiheit` · `/bildnachweise`
 
-## Was eingebaut ist
+Startseite nach **Variante B** (selbsterklärendes Angebot): Hero, Leistungen, Google-Bewertungen
+(erscheinen automatisch, sobald `googleProfile`, `reviews` und `reviewSummary` in `src/config.mjs`
+gefüllt sind), Einblicke, Warum wir, Über uns kurz, Einsatzgebiet und Erreichbarkeit,
+kurze Fragen, Kontaktblock.
 
-**SEO (Seobility-Kriterien)**
-- Eigener Titel (max. 60 Zeichen) und eigene Meta-Beschreibung (120–160 Zeichen) je Seite, vom Test geprüft
-- Genau eine H1 je Seite, saubere Überschriften-Reihenfolge, Suchbegriff „Würzburg“ in Titel, H1 und Einleitung
-- Mindestens 350 Wörter eigener Text je Inhaltsseite, kein Absatz doppelt auf zwei Seiten
-- Sprechende Linktexte statt „mehr erfahren“, interne Verlinkung zwischen allen Leistungsseiten
-- Canonical, Open Graph, `sitemap.xml`, `robots.txt`, eigene 404-Seite
-- Strukturierte Daten: LocalBusiness, WebSite, WebPage, BreadcrumbList, Service, FAQPage
-- Sprechende Bilddateinamen und beschreibende Alttexte
+## Farbpalette
 
-**Ladezeit** (Lighthouse lokal: Leistung 99, Barrierefreiheit 100, Best Practices 100, SEO 100)
-- Keine Frameworks, keine externen Skripte, Schriften lokal (nur 3 Dateien)
-- WebP in mehreren Größen mit `srcset`, `width`/`height` gegen Layoutsprünge, Lazy Loading
-- Startseite rund 190 KB gesamt; `.htaccess` mit Komprimierung und langem Caching
+Abgeleitet aus Logo und Empfangswand (Schriftzug hell auf Anthrazit, warmes Licht in Champagner).
 
-**Barrierefreiheit** (axe-core WCAG 2.2 AA: 0 Verstöße auf allen Seiten, Desktop, Handy und Kontrastmodus)
-- Tastaturbedienung, sichtbarer Fokus, „Zum Inhalt springen“, Brotkrümel, Orientierungsbereiche
-- Schaltfläche „Aa“: Textgröße in drei Stufen, Hochkontrast, Bewegungen aus (nur lokal gespeichert)
-- Formular mit Beschriftungen, Fehlermeldungen am Feld, Statusmeldungen für Screenreader
-- Alles bleibt ohne JavaScript lesbar; `prefers-reduced-motion` wird beachtet
+| Token | Wert | Einsatz |
+| --- | --- | --- |
+| `--bg` | `#f8f6f1` | Grundfläche, warmes Weiß |
+| `--surface` | `#ffffff` | Formular, Hinweiskästen |
+| `--surface-alt` | `#efebe3` | Abgesetzte helle Abschnitte |
+| `--text` | `#1a1e25` | Fließtext |
+| `--muted` | `#4c525d` | Gedämpfter Text (7,4:1) |
+| `--line` | `#d9d3c7` | Feine Linien |
+| `--accent` | `#c8ad7f` | Champagner-Gold: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
+| `--accent-strong` | `#dcc7a2` | Hover auf Dunkel |
+| `--accent-ink` | `#75592b` | Links und Icons auf Hell (5,9:1) |
+| `--on-accent` | `#11151c` | Schrift auf Gold (9,1:1) |
+| `--dark` | `#11151c` | Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
+| `--dark-2` | `#1b212b` | Kontaktblock, Untermenü |
+| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Gold) |
 
-**Datenschutz**
-- Keine Cookies, kein Tracking, keine eingebetteten Karten → kein Cookie-Banner nötig
-- Google Maps nur als einfacher Link
+## Schriften
+
+Wirkung: **seriös, ruhig, hochwertig**. Überschriften in **Playfair Display** (600), weil die
+elegante Serife zum geschwungenen Logo passt. Text in **Inter** (400 und 600), gut lesbar auf
+jedem Bildschirm. Beide unter SIL Open Font License, lokal als woff2, nur Inter 400 wird vorgeladen.
 
 ## Kontaktformular
 
-Ohne weitere Einrichtung öffnet „Anfrage senden“ das E-Mail-Programm mit einer fertig
-ausgefüllten Nachricht an `info@koenig-gebaeudereinigung.com`.
+Ohne Schlüssel öffnet „Anfrage senden“ das E-Mail-Programm mit einer fertig ausgefüllten
+Nachricht. Für den direkten Versand bei https://web3forms.com einen Zugangsschlüssel für
+`info@koenig-gebaeudereinigung.com` anlegen, in `src/config.mjs` bei `formKey` eintragen und neu
+bauen. Die Datenschutzerklärung bekommt dann automatisch den Abschnitt zu Web3Forms
+(Anschrift des Anbieters dort noch eintragen).
 
-Für den direkten Versand (wie bei babyschlaf-coach.de):
-1. Auf https://web3forms.com mit `info@koenig-gebaeudereinigung.com` einen Zugangsschlüssel anlegen.
-2. Den Schlüssel in `src/site.mjs` bei `formKey` eintragen.
-3. `npm run build` – die Datenschutzerklärung wird automatisch um Web3Forms ergänzt.
+## Vorschau und Livegang
 
-## Veröffentlichen
+**Vorschau (GitHub Pages)**: Solange `live: false` in `src/config.mjs` steht, tragen alle Seiten
+`noindex`, die Canonical-Angaben zeigen auf die echte Domain. Alle Pfade sind relativ, die
+Vorschau funktioniert auch im Unterordner `/Geb-udereinigung/`.
 
-**Eigene Domain (IONOS-Webspace)**
-1. `npm run build && npm test`
-2. Per SFTP in das Web-Verzeichnis der Domain hochladen: alle Seitenordner, `index.html`, `404.html`,
-   `assets/`, `favicon.ico`, `.htaccess`, `robots.txt`, `sitemap.xml`.
-   Nicht nötig (und per `.htaccess` gesperrt): `src/`, `scripts/`, `tests/`, `docs/`, `assets-source/`.
-3. SSL in IONOS aktivieren. Die `.htaccess` leitet auf `https://www.` um.
-4. Die alte WordPress-Installation erst danach entfernen bzw. die Domain umstellen.
-
-**Vorschau über GitHub Pages**: Einstellungen → Pages → Branch `main`, Ordner `/`. Alle
-internen Pfade sind relativ, die Seite funktioniert deshalb auch im Unterordner
-`/Geb-udereinigung/`. Die Canonical-Angaben zeigen immer auf die eigene Domain.
-
-**Nach dem Livegang**
-- Google Search Console: Domain bestätigen, `https://www.koenig-gebaeudereinigung.com/sitemap.xml` einreichen
-- Google-Unternehmensprofil auf die neue Seite verlinken, Anschrift wie im Impressum
-- Seobility-Check der Domain laufen lassen
+**Livegang (Hostinger, Git-Deploy aus `main`)**
+1. Alle `[ERSETZEN: ...]` aus `docs/FREIGABE.md` erledigen (`grep -rn "ERSETZEN" src` ist leer).
+2. In `src/config.mjs` `live: true` setzen, `npm run build && npm test`, committen.
+3. In Hostinger Git-Deploy aus `main` einrichten, SSL aktivieren. Die `.htaccess` erzwingt
+   `https://www.`, liefert saubere Adressen, komprimiert und setzt Cache- und Sicherheits-Header.
+4. Google Search Console: `https://www.koenig-gebaeudereinigung.com/sitemap.xml` einreichen.
 
 ## Bilder
 
-Alle Fotos und das Logo stammen vom Auftraggeber (Originale in `assets-source/`).
-Neues Foto: Datei in `assets-source/` ablegen, in `scripts/images.py` und in der Fotoliste
-in `src/layout.mjs` (mit Alttext) eintragen, `python3 scripts/images.py` ausführen.
+Alle Fotos und das Logo stammen von der bisherigen Website des Kunden (Originale in
+`assets-source/`), Nachweise unter `/bildnachweise`. Neues Foto: Datei in `assets-source/`
+ablegen, in `scripts/images.py` und in der Fotoliste in `src/layout.mjs` (mit Alt-Text)
+eintragen, `python3 scripts/images.py` ausführen.

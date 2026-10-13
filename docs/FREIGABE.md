@@ -1,35 +1,41 @@
-# Vor dem Livegang bestätigen
+# Offen-Liste vor dem Livegang
 
-Stand 13.10.2026. Diese Punkte stammen aus der bisherigen Website, aus üblicher Praxis in
-der Gebäudereinigung oder sind Annahmen. Bitte mit Leart Spahiu durchgehen und
-falsche Aussagen in `src/pages.mjs` bzw. `src/legal.mjs` anpassen oder streichen.
+Stand 13.10.2026. Alles, was im Code als `[ERSETZEN: ...]` steht, und alle Aussagen, die der
+Kunde bestätigen muss. Erst wenn diese Liste abgehakt ist, `live: true` setzen.
 
-## Firmendaten
-- [ ] Anschrift Neidertstraße 8, 97082 Würzburg (aus dem bisherigen Repository; auf der alten
-      WordPress-Seite stand keine Straße). Steht jetzt in Impressum, Fußzeile, Kontakt und
-      den strukturierten Daten. Falls das eine Privatadresse ist: trotzdem Pflicht im Impressum.
-- [ ] Kleinunternehmer nach § 19 UStG gilt weiterhin (Impressum und Häufige Fragen)
-- [ ] Hoster ist IONOS (Datenschutzerklärung). Auftragsverarbeitungsvertrag im IONOS-Kundenkonto abgeschlossen
-- [ ] Ist eine Eintragung in die Handwerksrolle vorhanden? Dann Kammer und Eintragung ins Impressum
+## Fehlende Angaben (im Code als [ERSETZEN])
+- [ ] Telefonische Erreichbarkeit, z. B. „Mo bis Fr, 8 bis 17 Uhr“ (`src/config.mjs`, `hours`)
+- [ ] Impressum: Rechtsform und Firmenname bestätigen (Einzelunternehmen, kein Registereintrag?)
+- [ ] Impressum: USt-IdNr. oder Wirtschafts-ID, falls vorhanden. Sonst Abschnitt „Steuer“ entfernen
+- [ ] Datenschutz: Löschfrist der Server-Logfiles beim Hoster bestätigen (eingetragen: höchstens 14 Tage)
+- [ ] Datenschutz: E-Mail-Anbieter nennen, falls das Postfach nicht bei Hostinger liegt
+- [ ] Bildnachweise: Fotograf oder Quelle und Nutzungsrecht je Foto bestätigen (bei Stockfotos Anbieter und Lizenz)
+- [ ] Über uns: echtes Foto von Leart Spahiu oder dem Team (derzeit Foto eines Mitarbeiters bei der Arbeit)
 
-## Aussagen zur Arbeitsweise
-- [ ] Reinigung außerhalb der Geschäftszeiten, auch am Wochenende nach Absprache
-- [ ] Besichtigung vor Ort auf Wunsch, schriftliches Angebot mit Leistungsverzeichnis
-- [ ] Festpreisangebote für Grund- und Sonderreinigungen
-- [ ] Reinigungsmittel und Geräte werden mitgebracht, Verbrauchsmaterial stellt der Kunde
-- [ ] Schlüsselübergabe schriftlich, Schlüssel unbeschriftet
-- [ ] Farblich getrennte Reinigungstücher (Praxisreinigung)
-- [ ] Reinigungstermine werden für Hausverwaltungen dokumentiert
-- [ ] Rückruf in der Regel am selben oder nächsten Werktag (Kontaktseite)
-- [ ] Glasreinigung außen nur, soweit vom Boden, mit Leiter oder Teleskopstange erreichbar
+## Bestätigen
+- [ ] Hosting bei Hostinger mit Auftragsverarbeitungsvertrag (Datenschutz nennt Hostinger)
+- [ ] Anschrift Neidertstraße 8, 97082 Würzburg (aus dem bisherigen Repository, auf der alten Seite stand keine Straße)
+- [ ] Kleinunternehmer nach § 19 UStG gilt weiterhin (Häufige Fragen)
+- [ ] „Familiengeführt“ und „inhabergeführt“ (Startseite, Über uns)
+- [ ] Gebäudereiniger ist ein zulassungsfreies Handwerk. Besteht eine Eintragung bei der
+      Handwerkskammer, kann sie ins Impressum, Pflicht ist sie dort nicht
+- [ ] Reinigung außerhalb der Geschäftszeiten möglich
+- [ ] Schriftliches Angebot mit Leistungsverzeichnis, Rhythmus, Preis, Laufzeit und Kündigungsfrist
+- [ ] Besichtigung oder Fotos vor Grund- und Sonderreinigungen, gemeinsame Abnahme auf Wunsch
+- [ ] Schlüssel- und Zugangsregelung wird schriftlich festgehalten
+- [ ] Rechnungen je Objekt für Hausverwaltungen
+- [ ] Praxisreinigung nach dem Hygieneplan der Praxis
+- [ ] Glasreinigung außen nur, soweit sicher erreichbar
 - [ ] Privathaushalte nur im Einzelfall
-- [ ] Laufzeit und Kündigungsfrist werden im Angebot festgelegt (keine feste Mindestlaufzeit genannt)
+
+## Google
+- [ ] Google-Unternehmensprofil anlegen und um Bewertungen bitten. Sobald es Bewertungen gibt,
+      Link, Durchschnitt, Anzahl und drei Bewertungen wörtlich in `src/config.mjs` eintragen.
+      Der Abschnitt erscheint dann automatisch auf der Startseite.
+
+## Optional
+- [ ] Kontaktformular: Web3Forms-Schlüssel anlegen (siehe README), bis dahin öffnet sich ein E-Mail-Entwurf
 
 ## Bewusst nicht behauptet
-Keine Kundenbewertungen, keine Sterne, keine Jahreszahlen zur Erfahrung, keine Teamgröße,
-keine Zertifikate, keine Versicherungssumme, keine Preise. Sobald es echte, freigegebene
-Angaben gibt (z. B. Google-Bewertungen, Referenzkunden mit Zustimmung), können sie ergänzt werden.
-
-## Offen
-- [ ] Kontaktformular: Web3Forms-Schlüssel anlegen (siehe README), bis dahin E-Mail-Entwurf
-- [ ] Ein echtes Foto des Inhabers oder Teams würde „Über uns“ deutlich stärker machen
+Keine Bewertungen, Sterne, Jahreszahlen, Teamgröße, Zertifikate, Versicherungssummen, Preise
+oder Referenzkunden. Sobald es echte, freigegebene Angaben gibt, können sie ergänzt werden.
