@@ -62,7 +62,7 @@ bg.alpha_composite(lg, ((1200 - lg.width) // 2, (630 - lg.height) // 2))
 bg.convert('RGB').save(ROOT / 'assets' / 'og-image.jpg', 'JPEG', quality=82, optimize=True, progressive=True)
 
 # Logo auf dunklem Grund als PNG für strukturierte Daten (Google erwartet ein Rasterbild).
-pad = Image.new('RGBA', (logo.width + 120, logo.height + 120), (17, 21, 28, 255))
+pad = Image.new('RGBA', (logo.width + 120, logo.height + 120), (28, 35, 43, 255))
 pad.alpha_composite(logo, (60, 60))
 pad.thumbnail((600, 600))
 pad.convert('RGB').save(ROOT / 'assets' / 'logo.png', 'PNG', optimize=True)

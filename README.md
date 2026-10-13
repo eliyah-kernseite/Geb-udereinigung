@@ -50,23 +50,23 @@ kurze Fragen, Kontaktblock.
 
 ## Farbpalette
 
-Abgeleitet aus Logo und Empfangswand (Schriftzug hell auf Anthrazit, warmes Licht in Champagner).
+Anthrazit und Mint: dunkle Markenfläche, auf der das helle Logo gut steht, dazu ein frisches Mint für Buttons und Links. Das wirkt sauber und freundlich, ohne nach Luxus auszusehen.
 
 | Token | Wert | Einsatz |
 | --- | --- | --- |
-| `--bg` | `#f8f6f1` | Grundfläche, warmes Weiß |
+| `--bg` | `#f7f8f7` | Grundfläche, kühles Weiß |
 | `--surface` | `#ffffff` | Formular, Hinweiskästen |
-| `--surface-alt` | `#efebe3` | Abgesetzte helle Abschnitte |
-| `--text` | `#1a1e25` | Fließtext |
-| `--muted` | `#4c525d` | Gedämpfter Text (7,4:1) |
-| `--line` | `#d9d3c7` | Feine Linien |
-| `--accent` | `#c8ad7f` | Champagner-Gold: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
-| `--accent-strong` | `#dcc7a2` | Hover auf Dunkel |
-| `--accent-ink` | `#75592b` | Links und Icons auf Hell (5,9:1) |
-| `--on-accent` | `#11151c` | Schrift auf Gold (9,1:1) |
-| `--dark` | `#11151c` | Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
-| `--dark-2` | `#1b212b` | Kontaktblock, Untermenü |
-| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Gold) |
+| `--surface-alt` | `#eaf1ef` | Abgesetzte helle Abschnitte |
+| `--text` | `#1a1f24` | Fließtext |
+| `--muted` | `#4a535a` | Gedämpfter Text (7,4:1) |
+| `--line` | `#d3ddd9` | Feine Linien |
+| `--accent` | `#5cbfae` | Mint: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
+| `--accent-strong` | `#86d3c6` | Hover auf Dunkel |
+| `--accent-ink` | `#1b6b61` | Links und Icons auf Hell (5,9:1) |
+| `--on-accent` | `#0e1c1b` | Schrift auf Mint (7,9:1) |
+| `--dark` | `#1c232b` | Anthrazit, Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
+| `--dark-2` | `#252e38` | Kontaktblock, Untermenü |
+| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Mint) |
 
 ## Schriften
 

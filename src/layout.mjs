@@ -151,7 +151,7 @@ export function layout(file, page) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <meta name="robots" content="${indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'}">
-${file === '404.html' ? '' : `<link rel="canonical" href="${url}">\n`}<meta name="theme-color" content="#11151c">
+${file === '404.html' ? '' : `<link rel="canonical" href="${url}">\n`}<meta name="theme-color" content="#1c232b">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
