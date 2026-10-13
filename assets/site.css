@@ -30,8 +30,8 @@
   --error: #b3261e;
   --font-display: 'Playfair Display', 'Playfair Fallback', Georgia, serif;
   --font-body: 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  --radius: 6px;
-  --radius-img: 4px;
+  --radius: 0;
+  --radius-img: 0;
   --container: 1240px;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --space: clamp(3.5rem, 7vw, 6.5rem);
@@ -79,7 +79,7 @@ main:focus { outline: none; }
 .nav-group { position: relative; }
 .subnav { position: absolute; top: 100%; left: 0; min-width: 17rem; padding: .5rem; background: var(--dark-2); border: 1px solid var(--line-dark); border-radius: var(--radius); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .18s, transform .18s var(--ease), visibility 0s linear .18s; }
 .nav-group:hover .subnav, .nav-group:focus-within .subnav { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
-.subnav a { display: block; padding: .65rem .8rem; border-radius: 4px; font-size: .975rem; }
+.subnav a { display: block; padding: .65rem .8rem; border-radius: var(--radius); font-size: .975rem; }
 .subnav a:hover, .subnav a[aria-current] { background: rgb(255 255 255 / .07); color: var(--accent-strong); }
 .chevron { opacity: .75; }
 .nav-cta { margin-left: .75rem; }
@@ -273,7 +273,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .group .plain li { padding: .55rem 0; border-top: 1px solid var(--line); }
 .group .plain li:last-child { border-bottom: 1px solid var(--line); }
 .notice { margin-top: 1.5rem; padding: 1.5rem; background: var(--surface); border-left: 4px solid var(--accent-ink); border-radius: var(--radius); }
-.legal-credit { margin-top: 1rem; padding: 1.5rem; background: var(--surface-alt); border-radius: 6px; }
+.legal-credit { margin-top: 1rem; padding: 1.5rem; background: var(--surface-alt); border-radius: var(--radius); }
 .legal-credit h2 { font: 600 .8rem/1.4 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .legal-credit p { margin-bottom: .4rem; }
 .next { margin-top: 2rem; font-weight: 600; }
