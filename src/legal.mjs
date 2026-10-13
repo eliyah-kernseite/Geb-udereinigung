@@ -144,7 +144,7 @@ const barrierefreiheit = legalPage('barrierefreiheit.html', {
   ],
 });
 
-const photoRows = Object.values(photos).map(p => [p.subject, 'König Gebäudereinigung, übernommen von der bisherigen Website']);
+const photoRows = Object.values(photos).map(p => [p.subject, p.credit ? `<a href="https://unsplash.com/photos/${p.credit.id}">${p.credit.name} auf Unsplash</a>, Unsplash Lizenz` : 'König Gebäudereinigung, übernommen von der bisherigen Website']);
 const bildnachweise = legalPage('bildnachweise.html', {
   title: 'Bildnachweise | König Gebäudereinigung Würzburg Website',
   description: 'Bildnachweise der Website von König Gebäudereinigung in Würzburg: Herkunft aller Fotos, des Logos und der verwendeten Schriften mit der jeweiligen Lizenz.',
@@ -152,7 +152,7 @@ const bildnachweise = legalPage('bildnachweise.html', {
   h1: 'Bildnachweise',
   next: ['impressum.html', 'Weiter zum Impressum'],
   groups: [
-    { id: 'fotos', title: 'Fotos', html: `${rows(photoRows)}<p>[ERSETZEN: Fotograf oder Bildquelle und Nutzungsrecht je Foto bestätigen. Bei Stockfotos Anbieter und Lizenz eintragen]</p>` },
+    { id: 'fotos', title: 'Fotos', html: `${rows(photoRows)}<p>Fotos mit dem Hinweis Unsplash stammen von unsplash.com und dürfen nach der Unsplash Lizenz kostenlos genutzt werden. Sie zeigen keine Räume und keine Mitarbeiter von König Gebäudereinigung.</p><p>[ERSETZEN: Fotograf und Nutzungsrecht der übernommenen Fotos der bisherigen Website bestätigen]</p>` },
     { id: 'logo', title: 'Logo', html: rows([['Wortmarke König Gebäudereinigung', 'König Gebäudereinigung']]) },
     { id: 'schriften', title: 'Schriften', html: rows([['Playfair Display', 'Claus Eggers Sørensen, SIL Open Font License 1.1'], ['Inter', 'Rasmus Andersson, SIL Open Font License 1.1']]) },
   ],

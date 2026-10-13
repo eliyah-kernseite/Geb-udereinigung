@@ -9,7 +9,7 @@ Kunde bestätigen muss. Erst wenn diese Liste abgehakt ist, `live: true` setzen.
 - [ ] Impressum: USt-IdNr. oder Wirtschafts-ID, falls vorhanden. Sonst Abschnitt „Steuer“ entfernen
 - [ ] Datenschutz: Löschfrist der Server-Logfiles beim Hoster bestätigen (eingetragen: höchstens 14 Tage)
 - [ ] Datenschutz: E-Mail-Anbieter nennen, falls das Postfach nicht bei Hostinger liegt
-- [ ] Bildnachweise: Fotograf oder Quelle und Nutzungsrecht je Foto bestätigen (bei Stockfotos Anbieter und Lizenz)
+- [ ] Bildnachweise: Fotograf und Nutzungsrecht der von der alten Website übernommenen Fotos bestätigen (die fünf Unsplash Fotos auf den Leistungsseiten sind bereits nachgewiesen)
 - [ ] Über uns: echtes Foto von Leart Spahiu oder dem Team (derzeit Foto eines Mitarbeiters bei der Arbeit)
 
 ## Bestätigen

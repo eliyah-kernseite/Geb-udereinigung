@@ -46,11 +46,11 @@ const home = {
       <p>Von der laufenden Unterhaltsreinigung bis zum einmaligen Einsatz nach einer Renovierung. Jede Leistung ist auf einer eigenen Seite ausführlich beschrieben.</p>
     </div>
     <div class="services">
-      ${serviceItem('bueroreinigung-wuerzburg.html', 'bueroflaeche-boden', 'Büroreinigung', 'Arbeitsplätze, Besprechungsräume, Küchen und Sanitärbereiche, regelmäßig nach festem Plan.', 'Zur Büroreinigung')}
-      ${serviceItem('praxisreinigung-wuerzburg.html', 'waschraum', 'Praxisreinigung', 'Wartebereiche, Behandlungsräume und Sanitärräume für Arzt- und Therapiepraxen.', 'Zur Praxisreinigung')}
-      ${serviceItem('treppenhausreinigung-wuerzburg.html', 'treppenhaus', 'Treppenhausreinigung', 'Stufen, Geländer, Eingänge und Kellerflure für Hausverwaltungen und Eigentümer.', 'Zur Treppenhausreinigung')}
-      ${serviceItem('glasreinigung-wuerzburg.html', 'glasfront-flur', 'Glasreinigung', 'Fenster, Glastüren, Trennwände und Schaufenster, streifenfrei und mit Rahmen.', 'Zur Glasreinigung')}
-      ${serviceItem('grundreinigung-wuerzburg.html', 'bodenreinigung-maschine', 'Grund- und Sonderreinigung', 'Einmalige Einsätze nach einem Umbau, vor einem Einzug oder für stark verschmutzte Böden.', 'Zur Grundreinigung')}
+      ${serviceItem('bueroreinigung-wuerzburg.html', 'grossraumbuero', 'Büroreinigung', 'Arbeitsplätze, Besprechungsräume, Küchen und Sanitärbereiche, regelmäßig nach festem Plan.', 'Zur Büroreinigung')}
+      ${serviceItem('praxisreinigung-wuerzburg.html', 'praxis-behandlungsraum', 'Praxisreinigung', 'Wartebereiche, Behandlungsräume und Sanitärräume für Arzt- und Therapiepraxen.', 'Zur Praxisreinigung')}
+      ${serviceItem('treppenhausreinigung-wuerzburg.html', 'treppenhaus-altbau', 'Treppenhausreinigung', 'Stufen, Geländer, Eingänge und Kellerflure für Hausverwaltungen und Eigentümer.', 'Zur Treppenhausreinigung')}
+      ${serviceItem('glasreinigung-wuerzburg.html', 'glastueren-buero', 'Glasreinigung', 'Fenster, Glastüren, Trennwände und Schaufenster, streifenfrei und mit Rahmen.', 'Zur Glasreinigung')}
+      ${serviceItem('grundreinigung-wuerzburg.html', 'wischeimer-warnschild', 'Grund- und Sonderreinigung', 'Einmalige Einsätze nach einem Umbau, vor einem Einzug oder für stark verschmutzte Böden.', 'Zur Grundreinigung')}
       <div class="service service-all" data-reveal><h3>Alle Leistungen</h3><p>Auch Sanitärreinigung und die materialgerechte Bodenreinigung gehören dazu. Den vollständigen Überblick finden Sie hier:</p><ul class="link-list"><li><a href="leistungen.html#unterhaltsreinigung">Unterhaltsreinigung</a></li><li><a href="leistungen.html#sanitaerreinigung">Sanitärreinigung</a></li><li><a href="leistungen.html#bodenreinigung">Bodenreinigung</a></li><li><a href="leistungen.html">Alle Leistungen im Überblick</a></li></ul></div>
     </div>
   </div>
@@ -130,10 +130,10 @@ ${reviews()}
 
 // Leistungsübersicht: alle sechs Bereiche mit Anker.
 const overview = [
-  ['unterhaltsreinigung', 'Unterhaltsreinigung', 'bueroflaeche-boden', 'Die Unterhaltsreinigung ist das Fundament: Ihre Räume werden in einem festen Rhythmus gereinigt, täglich, mehrmals pro Woche oder wöchentlich. Dazu gehören Böden, Arbeits- und Kontaktflächen, Papierkörbe, Küchen und Sanitärräume. Was wann gemacht wird, steht in einem Leistungsverzeichnis, das wir mit Ihnen abstimmen.', ['Büros, Praxen, Studios und Gewerbeflächen', 'Rhythmus von täglich bis wöchentlich', 'Leistungsverzeichnis mit festen Intervallen'], ['bueroreinigung-wuerzburg.html', 'Büroreinigung in Würzburg im Detail']],
-  ['glasreinigung', 'Glasreinigung', 'glasfront-flur', 'Saubere Fenster lassen Licht herein und zeigen Besuchern schon von außen, dass hier Wert auf Ordnung gelegt wird. Wir reinigen Fenster, Glastüren, Glastrennwände und Schaufenster streifenfrei, auf Wunsch mit Rahmen und Falzen. Welche Außenflächen erreichbar sind, klären wir vorab.', ['Fenster, Glastüren und Trennwände', 'Rahmen, Falze und Fensterbänke', 'Regelmäßig oder als Einzeltermin'], ['glasreinigung-wuerzburg.html', 'Glasreinigung in Würzburg im Detail']],
+  ['unterhaltsreinigung', 'Unterhaltsreinigung', 'grossraumbuero', 'Die Unterhaltsreinigung ist das Fundament: Ihre Räume werden in einem festen Rhythmus gereinigt, täglich, mehrmals pro Woche oder wöchentlich. Dazu gehören Böden, Arbeits- und Kontaktflächen, Papierkörbe, Küchen und Sanitärräume. Was wann gemacht wird, steht in einem Leistungsverzeichnis, das wir mit Ihnen abstimmen.', ['Büros, Praxen, Studios und Gewerbeflächen', 'Rhythmus von täglich bis wöchentlich', 'Leistungsverzeichnis mit festen Intervallen'], ['bueroreinigung-wuerzburg.html', 'Büroreinigung in Würzburg im Detail']],
+  ['glasreinigung', 'Glasreinigung', 'glastueren-buero', 'Saubere Fenster lassen Licht herein und zeigen Besuchern schon von außen, dass hier Wert auf Ordnung gelegt wird. Wir reinigen Fenster, Glastüren, Glastrennwände und Schaufenster streifenfrei, auf Wunsch mit Rahmen und Falzen. Welche Außenflächen erreichbar sind, klären wir vorab.', ['Fenster, Glastüren und Trennwände', 'Rahmen, Falze und Fensterbänke', 'Regelmäßig oder als Einzeltermin'], ['glasreinigung-wuerzburg.html', 'Glasreinigung in Würzburg im Detail']],
   ['sanitaerreinigung', 'Sanitärreinigung', 'waschraum', 'Kaum ein Raum wird so kritisch betrachtet wie die Toilette. Wir reinigen WC-Anlagen, Urinale, Waschbecken, Armaturen, Spiegel und Fliesen gründlich und entfernen Kalk an den Stellen, an denen er sich gern festsetzt. Das Nachfüllen von Seife, Papier und Handtüchern kann Teil der Vereinbarung sein.', ['WC-Anlagen, Waschbecken und Armaturen', 'Fliesen, Spiegel und Trennwände', 'Verbrauchsmaterial nach Absprache'], ['praxisreinigung-wuerzburg.html', 'Reinigung von Praxisräumen ansehen']],
-  ['treppenhausreinigung', 'Treppenhausreinigung', 'treppenhaus', 'Im Treppenhaus begegnen sich Mieter, Besucher und Lieferanten. Wir kehren und wischen Stufen und Podeste, reinigen Handläufe, Geländer, Briefkästen, Türen und Lichtschalter und halten Eingangsbereiche und Kellerflure in Ordnung.', ['Stufen, Podeste und Eingangsbereiche', 'Handläufe, Geländer, Türen und Briefkästen', 'Für Hausverwaltungen und Eigentümer'], ['treppenhausreinigung-wuerzburg.html', 'Treppenhausreinigung in Würzburg im Detail']],
+  ['treppenhausreinigung', 'Treppenhausreinigung', 'treppenhaus-altbau', 'Im Treppenhaus begegnen sich Mieter, Besucher und Lieferanten. Wir kehren und wischen Stufen und Podeste, reinigen Handläufe, Geländer, Briefkästen, Türen und Lichtschalter und halten Eingangsbereiche und Kellerflure in Ordnung.', ['Stufen, Podeste und Eingangsbereiche', 'Handläufe, Geländer, Türen und Briefkästen', 'Für Hausverwaltungen und Eigentümer'], ['treppenhausreinigung-wuerzburg.html', 'Treppenhausreinigung in Würzburg im Detail']],
   ['bodenreinigung', 'Bodenreinigung', 'empfang-koenig-schriftzug', 'Jeder Belag verlangt eine eigene Behandlung. Fliesen, Vinyl, Linoleum, Laminat, Naturstein und Teppich reinigen wir mit passenden Mitteln und Verfahren, damit die Oberfläche lange schön bleibt. Bei stärkerer Verschmutzung kommt eine maschinelle Grundreinigung infrage.', ['Hartböden und textile Beläge', 'Materialgerechte Reinigungsmittel', 'Maschinelle Reinigung größerer Flächen'], ['grundreinigung-wuerzburg.html', 'Grundreinigung von Böden ansehen']],
   ['sonderreinigung', 'Sonderreinigung', 'bodenreinigung-maschine', 'Manche Aufgaben fallen nur einmal an: die Reinigung nach einem Umbau, vor der Übergabe an neue Mieter, nach einer Veranstaltung oder einfach, weil es wieder richtig sauber werden soll. Den Umfang besprechen wir vorab und halten ihn im Angebot fest.', ['Reinigung nach Umbau oder Renovierung', 'Vor Einzug, Auszug oder Neuvermietung', 'Einmalige Tiefenreinigung'], ['grundreinigung-wuerzburg.html', 'Grund- und Sonderreinigung im Detail']],
 ];
@@ -222,7 +222,7 @@ ${pageHead({ eyebrow: 'Würzburg und Umgebung', title: h1, lead })}
 
 const landings = [
   landing({
-    file: 'bueroreinigung-wuerzburg.html', service: 'Büroreinigung', image: 'bueroflaeche-boden',
+    file: 'bueroreinigung-wuerzburg.html', service: 'Büroreinigung', image: 'grossraumbuero',
     title: 'Büroreinigung in Würzburg | König Gebäudereinigung',
     description: 'Büroreinigung in Würzburg: Arbeitsplätze, Küchen und Sanitärräume nach festem Plan, abgestimmt auf Ihre Arbeitszeiten. Jetzt Angebot anfordern.',
     h1: 'Büroreinigung in Würzburg',
@@ -255,7 +255,7 @@ const landings = [
     closing: ['Büroreinigung in Würzburg anfragen', 'Nennen Sie uns Fläche, Anzahl der Räume und den gewünschten Rhythmus. Sie bekommen ein klares Angebot für die Reinigung Ihres Büros.'],
   }),
   landing({
-    file: 'praxisreinigung-wuerzburg.html', service: 'Praxisreinigung', image: 'waschraum',
+    file: 'praxisreinigung-wuerzburg.html', service: 'Praxisreinigung', image: 'praxis-behandlungsraum',
     title: 'Praxisreinigung in Würzburg | König Gebäudereinigung',
     description: 'Praxisreinigung in Würzburg für Arzt-, Zahnarzt- und Therapiepraxen: gründlich, nach Ihrem Hygieneplan und außerhalb der Sprechzeiten möglich.',
     h1: 'Praxisreinigung in Würzburg',
@@ -288,7 +288,7 @@ const landings = [
     closing: ['Praxisreinigung in Würzburg anfragen', 'Sagen Sie uns, um welche Art von Praxis es geht, wie viele Räume sie hat und wann gereinigt werden soll. Wir melden uns mit einem Angebot.'],
   }),
   landing({
-    file: 'treppenhausreinigung-wuerzburg.html', service: 'Treppenhausreinigung', image: 'treppenhaus',
+    file: 'treppenhausreinigung-wuerzburg.html', service: 'Treppenhausreinigung', image: 'treppenhaus-altbau',
     title: 'Treppenhausreinigung in Würzburg | König Gebäudereinigung',
     description: 'Treppenhausreinigung in Würzburg für Hausverwaltungen und Eigentümer: Stufen, Geländer, Eingänge und Kellerflure nach festem Plan. Jetzt anfragen.',
     h1: 'Treppenhausreinigung in Würzburg',
@@ -321,7 +321,7 @@ const landings = [
     closing: ['Treppenhausreinigung in Würzburg anfragen', 'Nennen Sie uns Adresse, Anzahl der Etagen und den gewünschten Rhythmus. Für mehrere Objekte erstellen wir gern ein gemeinsames Angebot.'],
   }),
   landing({
-    file: 'glasreinigung-wuerzburg.html', service: 'Glasreinigung', image: 'glasfront-flur',
+    file: 'glasreinigung-wuerzburg.html', service: 'Glasreinigung', image: 'glastueren-buero',
     title: 'Glasreinigung in Würzburg | König Gebäudereinigung',
     description: 'Glas- und Fensterreinigung in Würzburg: Fenster, Glastüren, Trennwände und Schaufenster streifenfrei, mit Rahmen. Unverbindliches Angebot anfordern.',
     h1: 'Glasreinigung in Würzburg',
@@ -354,7 +354,7 @@ const landings = [
     closing: ['Glasreinigung in Würzburg anfragen', 'Sagen Sie uns, wie viele Fenster oder welche Glasflächen gereinigt werden sollen und ob innen, außen oder beides. Ein Foto hilft bei der Einschätzung.'],
   }),
   landing({
-    file: 'grundreinigung-wuerzburg.html', service: 'Grundreinigung', image: 'bodenreinigung-maschine',
+    file: 'grundreinigung-wuerzburg.html', service: 'Grundreinigung', image: 'wischeimer-warnschild',
     title: 'Grundreinigung in Würzburg | König Gebäudereinigung',
     description: 'Grund- und Sonderreinigung in Würzburg: nach Umbau, vor Einzug oder Neuvermietung und für stark verschmutzte Böden. Jetzt Angebot anfordern.',
     h1: 'Grund- und Sonderreinigung in Würzburg',

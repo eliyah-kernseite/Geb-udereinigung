@@ -22,6 +22,12 @@ PHOTOS = {
     'treppenhausreinigung': 'treppenhaus',
     'bodenreinigung': 'bueroflaeche-boden',
     'sonderreinigung': 'bodenreinigung-maschine',
+    # Unsplash (Unsplash Lizenz), Nachweise in src/layout.mjs und auf der Seite Bildnachweise.
+    'unsplash-buero': 'grossraumbuero',
+    'unsplash-praxis': 'praxis-behandlungsraum',
+    'unsplash-treppenhaus': 'treppenhaus-altbau',
+    'unsplash-glas': 'glastueren-buero',
+    'unsplash-grundreinigung': 'wischeimer-warnschild',
 }
 WIDTHS = [640, 960, 1440]
 

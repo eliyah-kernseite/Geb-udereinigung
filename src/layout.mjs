@@ -17,7 +17,12 @@ export const photos = {
   'glasfront-flur': { w: 683, h: 442, sizes: [640, 683], subject: 'Flur mit Glasfronten', alt: 'Heller Flur mit raumhohen Glasfronten, Pflanzkübeln und spiegelndem Steinboden.' },
   waschraum: { w: 683, h: 443, sizes: [640, 683], subject: 'Waschraum', alt: 'Gepflegter Waschraum mit Steinwaschtisch, Armaturen, gefalteten Handtüchern und indirektem Licht.' },
   treppenhaus: { w: 683, h: 442, sizes: [640, 683], subject: 'Treppenhaus', alt: 'Sauberes Treppenhaus mit Steinstufen, Metallgeländer und verglaster Eingangstür.' },
-  'bueroflaeche-boden': { w: 683, h: 441, sizes: [640, 683], subject: 'Leere Bürofläche', alt: 'Leere, helle Bürofläche mit glattem Boden und großen Fenstern.' },
+  // Unsplash Fotos (Unsplash Lizenz), keine Aufnahmen von König Gebäudereinigung. Nachweis auf der Seite Bildnachweise.
+  grossraumbuero: { w: 1440, h: 960, sizes: [640, 960, 1440], subject: 'Großraumbüro', alt: 'Helles Großraumbüro mit weißen Schreibtischen, Bürostühlen und Trennwänden aus Milchglas auf einem hellen Fliesenboden.', credit: { name: 'Adolfo Félix', id: 'PG8NyM_Mcts' } },
+  'praxis-behandlungsraum': { w: 1440, h: 960, sizes: [640, 960, 1440], subject: 'Behandlungsraum einer Zahnarztpraxis', alt: 'Heller, aufgeräumter Behandlungsraum einer Zahnarztpraxis mit Behandlungsstuhl, Lampe und weißen Schränken.', credit: { name: 'Kari Bjorn Photography', id: 'Fdku_oMrDvk' } },
+  'treppenhaus-altbau': { w: 1440, h: 960, sizes: [640, 960, 1440], subject: 'Treppenhaus im Altbau', alt: 'Treppenhaus in einem Altbau mit rotem Treppenläufer, gedrechseltem Holzgeländer und Tageslicht durch hohe Fenster.', credit: { name: 'Stefan Steinbauer', id: 'hnhE83RhAWg' } },
+  'glastueren-buero': { w: 1440, h: 960, sizes: [640, 960, 1440], subject: 'Büroflur mit Glastüren', alt: 'Langer Büroflur zwischen Glaswänden und Glastüren mit schwarzen Rahmen, dahinter eine Sitzecke.', credit: { name: 'Nastuh Abootalebi', id: 'yWwob8kwOCk' } },
+  'wischeimer-warnschild': { w: 1440, h: 960, sizes: [640, 960, 1440], subject: 'Wischeimer und Warnschild', alt: 'Gelber Wischeimer mit Mopp und gelbes Warnschild auf einem frisch gewischten, glänzenden Steinboden vor einer Glastürfront.', credit: { name: 'Christian R', id: 'PkFdlMAl85Q' } },
 };
 
 export function photo(name, { sizes = '(max-width: 48rem) 100vw, 50vw', priority = false, cls = '', alt } = {}) {
