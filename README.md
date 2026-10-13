@@ -50,23 +50,23 @@ kurze Fragen, Kontaktblock.
 
 ## Farbpalette
 
-Marineblau und Himmelblau: dunkle Markenfläche, auf der das helle Logo gut steht, dazu ein frisches Blau für Buttons und Links. Blau wirkt seriös und verlässlich, ohne nach Luxus auszusehen.
+Anthrazit und Mint: dunkle Markenfläche, auf der das helle Logo gut steht, dazu ein frisches Mint für Buttons und Links. Das wirkt sauber und freundlich, ohne nach Luxus auszusehen.
 
 | Token | Wert | Einsatz |
 | --- | --- | --- |
-| `--bg` | `#f6f8fb` | Grundfläche, kühles Weiß |
+| `--bg` | `#f7f8f7` | Grundfläche, kühles Weiß |
 | `--surface` | `#ffffff` | Formular, Hinweiskästen |
-| `--surface-alt` | `#e9eff6` | Abgesetzte helle Abschnitte |
-| `--text` | `#14202e` | Fließtext |
-| `--muted` | `#475467` | Gedämpfter Text (7,2:1) |
-| `--line` | `#d3dce7` | Feine Linien |
-| `--accent` | `#7cb8ea` | Himmelblau: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
-| `--accent-strong` | `#a6d0f2` | Hover auf Dunkel |
-| `--accent-ink` | `#1d5c96` | Links und Icons auf Hell (6,5:1) |
-| `--on-accent` | `#0f2238` | Schrift auf Himmelblau (7,6:1) |
-| `--dark` | `#102a46` | Marineblau, Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
-| `--dark-2` | `#16365a` | Kontaktblock, Untermenü |
-| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Himmelblau) |
+| `--surface-alt` | `#eaf1ef` | Abgesetzte helle Abschnitte |
+| `--text` | `#1a1f24` | Fließtext |
+| `--muted` | `#4a535a` | Gedämpfter Text (7,4:1) |
+| `--line` | `#d3ddd9` | Feine Linien |
+| `--accent` | `#5cbfae` | Mint: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
+| `--accent-strong` | `#86d3c6` | Hover auf Dunkel |
+| `--accent-ink` | `#1b6b61` | Links und Icons auf Hell (5,9:1) |
+| `--on-accent` | `#0e1c1b` | Schrift auf Mint (7,9:1) |
+| `--dark` | `#1c232b` | Anthrazit, Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
+| `--dark-2` | `#252e38` | Kontaktblock, Untermenü |
+| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Mint) |
 
 ## Schriften
 

@@ -10,21 +10,21 @@
 @font-face { font-family: 'Playfair Fallback'; src: local('Georgia'); size-adjust: 104%; ascent-override: 98%; descent-override: 23%; }
 
 :root {
-  --bg: #f6f8fb;            /* Grundfläche, kühles Weiß */
+  --bg: #f7f8f7;            /* Grundfläche, kühles Weiß */
   --surface: #ffffff;       /* Formular, Hinweise */
-  --surface-alt: #e9eff6;   /* abgesetzte helle Fläche */
-  --text: #14202e;          /* Textfarbe */
-  --muted: #475467;         /* gedämpfter Text, 7.2:1 auf --bg */
-  --line: #d3dce7;          /* feine Linien */
-  --accent: #7cb8ea;        /* Himmelblau: Buttons, Linien, Herz. Als Text nur auf Dunkel */
-  --accent-strong: #a6d0f2; /* hellere Stufe für Hover auf Dunkel */
-  --accent-ink: #1d5c96;    /* dunklere Stufe für Links und Icons auf Hell, 6.5:1 auf --bg */
-  --on-accent: #0f2238;     /* Schrift auf Himmelblau, 7.6:1 */
-  --dark: #102a46;          /* Markenfläche: Kopf, Footer */
-  --dark-rgb: 16 42 70;      /* dieselbe Farbe für Verläufe mit Transparenz */
-  --dark-2: #16365a;        /* Kontaktblock, Untermenü */
-  --on-dark: #f2f5f9;
-  --on-dark-muted: #bccbdc; /* 8.8:1 auf --dark */
+  --surface-alt: #eaf1ef;   /* abgesetzte helle Fläche */
+  --text: #1a1f24;          /* Textfarbe */
+  --muted: #4a535a;         /* gedämpfter Text, 7,4:1 auf --bg */
+  --line: #d3ddd9;          /* feine Linien */
+  --accent: #5cbfae;        /* Mint: Buttons, Linien, Herz. Als Text nur auf Dunkel */
+  --accent-strong: #86d3c6; /* hellere Stufe für Hover auf Dunkel */
+  --accent-ink: #1b6b61;    /* dunklere Stufe für Links und Icons auf Hell, 5,9:1 auf --bg */
+  --on-accent: #0e1c1b;     /* Schrift auf Mint, 7,9:1 */
+  --dark: #1c232b;          /* Markenfläche: Kopf, Footer */
+  --dark-rgb: 28 35 43;      /* dieselbe Farbe für Verläufe mit Transparenz */
+  --dark-2: #252e38;        /* Kontaktblock, Untermenü */
+  --on-dark: #f2f4f3;
+  --on-dark-muted: #c0c7cf; /* 9,3:1 auf --dark */
   --line-dark: rgb(255 255 255 / .14);
   --focus: #1f5fbf;
   --error: #b3261e;
