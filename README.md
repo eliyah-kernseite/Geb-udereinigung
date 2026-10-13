@@ -50,23 +50,23 @@ kurze Fragen, Kontaktblock.
 
 ## Farbpalette
 
-Abgeleitet aus Logo und Empfangswand (Schriftzug hell auf Anthrazit, warmes Licht in Champagner).
+Marineblau und Himmelblau: dunkle Markenfläche, auf der das helle Logo gut steht, dazu ein frisches Blau für Buttons und Links. Blau wirkt seriös und verlässlich, ohne nach Luxus auszusehen.
 
 | Token | Wert | Einsatz |
 | --- | --- | --- |
-| `--bg` | `#f8f6f1` | Grundfläche, warmes Weiß |
+| `--bg` | `#f6f8fb` | Grundfläche, kühles Weiß |
 | `--surface` | `#ffffff` | Formular, Hinweiskästen |
-| `--surface-alt` | `#efebe3` | Abgesetzte helle Abschnitte |
-| `--text` | `#1a1e25` | Fließtext |
-| `--muted` | `#4c525d` | Gedämpfter Text (7,4:1) |
-| `--line` | `#d9d3c7` | Feine Linien |
-| `--accent` | `#c8ad7f` | Champagner-Gold: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
-| `--accent-strong` | `#dcc7a2` | Hover auf Dunkel |
-| `--accent-ink` | `#75592b` | Links und Icons auf Hell (5,9:1) |
-| `--on-accent` | `#11151c` | Schrift auf Gold (9,1:1) |
-| `--dark` | `#11151c` | Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
-| `--dark-2` | `#1b212b` | Kontaktblock, Untermenü |
-| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Gold) |
+| `--surface-alt` | `#e9eff6` | Abgesetzte helle Abschnitte |
+| `--text` | `#14202e` | Fließtext |
+| `--muted` | `#475467` | Gedämpfter Text (7,2:1) |
+| `--line` | `#d3dce7` | Feine Linien |
+| `--accent` | `#7cb8ea` | Himmelblau: Buttons, Linien, Herz, A11y-Auswahl. Als Text nur auf Dunkel |
+| `--accent-strong` | `#a6d0f2` | Hover auf Dunkel |
+| `--accent-ink` | `#1d5c96` | Links und Icons auf Hell (6,5:1) |
+| `--on-accent` | `#0f2238` | Schrift auf Himmelblau (7,6:1) |
+| `--dark` | `#102a46` | Marineblau, Markenfläche: Header, Footer, Hero, A11y-Schalter, `theme-color` |
+| `--dark-2` | `#16365a` | Kontaktblock, Untermenü |
+| `--focus` | `#1f5fbf` | Fokusring auf Hell (auf Dunkel Himmelblau) |
 
 ## Schriften
 

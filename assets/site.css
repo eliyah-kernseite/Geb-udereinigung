@@ -1,5 +1,5 @@
 /* König Gebäudereinigung. Gestaltung nach dem KERNSEITE-Bauplan.
-   Palette aus Logo und Empfangswand: dunkles Anthrazit, Champagner-Gold, warme helle Flächen.
+   Palette: Marineblau und Himmelblau. Dunkle Markenfläche für das helle Logo, kühle helle Flächen.
    Schriften lokal: Playfair Display (Überschriften), Inter (Text). Farben nur über Tokens. */
 
 @font-face { font-family: 'Inter'; src: url('fonts/inter-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -10,20 +10,21 @@
 @font-face { font-family: 'Playfair Fallback'; src: local('Georgia'); size-adjust: 104%; ascent-override: 98%; descent-override: 23%; }
 
 :root {
-  --bg: #f8f6f1;            /* Grundfläche, warmes Weiß */
+  --bg: #f6f8fb;            /* Grundfläche, kühles Weiß */
   --surface: #ffffff;       /* Formular, Hinweise */
-  --surface-alt: #efebe3;   /* abgesetzte helle Fläche */
-  --text: #1a1e25;          /* Textfarbe */
-  --muted: #4c525d;         /* gedämpfter Text, 7,4:1 auf --bg */
-  --line: #d9d3c7;          /* feine Linien */
-  --accent: #c8ad7f;        /* Champagner-Gold: Buttons, Linien, Herz. Als Text nur auf Dunkel */
-  --accent-strong: #dcc7a2; /* hellere Stufe für Hover auf Dunkel */
-  --accent-ink: #75592b;    /* dunklere Stufe für Links und Icons auf Hell, 5,9:1 auf --bg */
-  --on-accent: #11151c;     /* Schrift auf Gold, 9,1:1 */
-  --dark: #11151c;          /* Markenfläche: Kopf, Footer */
-  --dark-2: #1b212b;        /* Kontaktblock, Untermenü */
-  --on-dark: #f3f1ec;
-  --on-dark-muted: #bcc0c8; /* 9,6:1 auf --dark */
+  --surface-alt: #e9eff6;   /* abgesetzte helle Fläche */
+  --text: #14202e;          /* Textfarbe */
+  --muted: #475467;         /* gedämpfter Text, 7.2:1 auf --bg */
+  --line: #d3dce7;          /* feine Linien */
+  --accent: #7cb8ea;        /* Himmelblau: Buttons, Linien, Herz. Als Text nur auf Dunkel */
+  --accent-strong: #a6d0f2; /* hellere Stufe für Hover auf Dunkel */
+  --accent-ink: #1d5c96;    /* dunklere Stufe für Links und Icons auf Hell, 6.5:1 auf --bg */
+  --on-accent: #0f2238;     /* Schrift auf Himmelblau, 7.6:1 */
+  --dark: #102a46;          /* Markenfläche: Kopf, Footer */
+  --dark-rgb: 16 42 70;      /* dieselbe Farbe für Verläufe mit Transparenz */
+  --dark-2: #16365a;        /* Kontaktblock, Untermenü */
+  --on-dark: #f2f5f9;
+  --on-dark-muted: #bccbdc; /* 8.8:1 auf --dark */
   --line-dark: rgb(255 255 255 / .14);
   --focus: #1f5fbf;
   --error: #b3261e;
@@ -109,7 +110,7 @@ main:focus { outline: none; }
 .hero { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: min(calc(100svh - var(--header)), 52rem); background: var(--dark); color: #fff; overflow: hidden; }
 .hero-media, .page-head-media { position: absolute; inset: 0; z-index: -1; }
 .hero-media img, .page-head-media img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 65% 50%); }
-.hero-media::after, .page-head-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(17 21 28 / .35) 0%, rgb(17 21 28 / .55) 45%, rgb(17 21 28 / .92) 100%), linear-gradient(90deg, rgb(17 21 28 / .6) 0%, rgb(17 21 28 / 0) 70%); }
+.hero-media::after, .page-head-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(var(--dark-rgb) / .35) 0%, rgb(var(--dark-rgb) / .55) 45%, rgb(var(--dark-rgb) / .92) 100%), linear-gradient(90deg, rgb(var(--dark-rgb) / .6) 0%, rgb(var(--dark-rgb) / 0) 70%); }
 .hero-inner { padding-block: clamp(6rem, 14vw, 10rem) clamp(3rem, 7vw, 5.5rem); }
 .hero h1 { max-width: 16ch; font-size: clamp(2.2rem, 5vw + 1.2rem, 5.2rem); line-height: 1.05; color: #fff; }
 .hero .lead { color: rgb(255 255 255 / .88); }
