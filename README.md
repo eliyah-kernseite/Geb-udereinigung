@@ -89,7 +89,8 @@ bauen. Die Datenschutzerklärung bekommt dann automatisch den Abschnitt zu Web3F
 Vorschau funktioniert auch im Unterordner `/Geb-udereinigung/`.
 
 **Livegang (Hostinger, Git-Deploy aus `main`)**
-1. Alle `[ERSETZEN: ...]` aus `docs/FREIGABE.md` erledigen (`grep -rn "ERSETZEN" src` ist leer).
+1. Alle `[ERSETZEN: ...]` und `[PERSÖNLICHE ...]` aus `docs/FREIGABE.md` erledigen
+   (`grep -rnE "ERSETZEN|PERSÖNLICHE" src` ist leer).
 2. In `src/config.mjs` `live: true` setzen, `npm run build && npm test`, committen.
 3. In Hostinger Git-Deploy aus `main` einrichten, SSL aktivieren. Die `.htaccess` erzwingt
    `https://www.`, liefert saubere Adressen, komprimiert und setzt Cache- und Sicherheits-Header.
@@ -97,7 +98,7 @@ Vorschau funktioniert auch im Unterordner `/Geb-udereinigung/`.
 
 ## Bilder
 
-Alle Fotos und das Logo stammen von der bisherigen Website des Kunden (Originale in
-`assets-source/`), Nachweise unter `/bildnachweise`. Neues Foto: Datei in `assets-source/`
+Logo und eigene Fotos stammen vom Kunden, fünf Fotos auf den Leistungsseiten von Unsplash
+(Originale in `assets-source/`), Nachweise unter `/bildnachweise`. Neues Foto: Datei in `assets-source/`
 ablegen, in `scripts/images.py` und in der Fotoliste in `src/layout.mjs` (mit Alt-Text)
 eintragen, `python3 scripts/images.py` ausführen.

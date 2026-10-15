@@ -144,7 +144,7 @@ const barrierefreiheit = legalPage('barrierefreiheit.html', {
   ],
 });
 
-const photoRows = Object.values(photos).map(p => [p.subject, p.credit ? `<a href="https://unsplash.com/photos/${p.credit.id}">${p.credit.name} auf Unsplash</a>, Unsplash Lizenz` : 'König Gebäudereinigung, übernommen von der bisherigen Website']);
+const photoRows = Object.values(photos).map(p => [p.subject, p.credit ? `<a href="https://unsplash.com/photos/${p.credit.id}">${p.credit.name} auf Unsplash</a>, Unsplash Lizenz` : 'König Gebäudereinigung']);
 const bildnachweise = legalPage('bildnachweise.html', {
   title: 'Bildnachweise | König Gebäudereinigung Würzburg Website',
   description: 'Bildnachweise der Website von König Gebäudereinigung in Würzburg: Herkunft aller Fotos, des Logos und der verwendeten Schriften mit der jeweiligen Lizenz.',

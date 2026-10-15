@@ -12,6 +12,10 @@ Kunde bestätigen muss. Erst wenn diese Liste abgehakt ist, `live: true` setzen.
 - [ ] Bildnachweise: Fotograf und Nutzungsrecht der von der alten Website übernommenen Fotos bestätigen (die fünf Unsplash Fotos auf den Leistungsseiten sind bereits nachgewiesen)
 - [ ] Über uns: echtes Foto von Leart Spahiu oder dem Team (derzeit Foto eines Mitarbeiters bei der Arbeit)
 
+## Persönliche Texte vom Kunden (im Code als [PERSÖNLICHE ...])
+- [ ] Über uns, „Wie alles angefangen hat“: Wann und warum der Betrieb gegründet wurde und wie Leart Spahiu dazugekommen ist
+- [ ] Über uns, „Was uns wichtig ist“: Ein Beispiel von Leart Spahiu, worauf er bei einer Reinigung immer zuerst achtet
+
 ## Bestätigen
 - [ ] Hosting bei Hostinger mit Auftragsverarbeitungsvertrag (Datenschutz nennt Hostinger)
 - [ ] Anschrift Neidertstraße 8, 97082 Würzburg (aus dem bisherigen Repository, auf der alten Seite stand keine Straße)

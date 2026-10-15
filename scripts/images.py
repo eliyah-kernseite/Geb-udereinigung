@@ -20,7 +20,6 @@ PHOTOS = {
     'glasreinigung': 'glasfront-flur',
     'sanitaerreinigung': 'waschraum',
     'treppenhausreinigung': 'treppenhaus',
-    'bodenreinigung': 'bueroflaeche-boden',
     'sonderreinigung': 'bodenreinigung-maschine',
     # Unsplash (Unsplash Lizenz), Nachweise in src/layout.mjs und auf der Seite Bildnachweise.
     'unsplash-buero': 'grossraumbuero',
