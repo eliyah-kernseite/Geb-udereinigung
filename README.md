@@ -88,11 +88,14 @@ bauen. Die Datenschutzerklärung bekommt dann automatisch den Abschnitt zu Web3F
 `noindex`, die Canonical-Angaben zeigen auf die echte Domain. Alle Pfade sind relativ, die
 Vorschau funktioniert auch im Unterordner `/Geb-udereinigung/`.
 
-**Livegang (Hostinger, Git-Deploy aus `main`)**
+**Livegang (Hostinger, Git-Deploy aus `live`)**
+
+Jeder Push auf `main` startet `.github/workflows/publish-live.yml`: bauen, testen und nur die Dateien, die online gehen sollen, auf den Branch `live` legen. Hostinger zieht `live`, nie `main`. Dieses Repository hat noch keinen `main`-Branch; vor dem Livegang den Arbeitsbranch nach `main` übernehmen.
+
 1. Alle `[ERSETZEN: ...]` und `[PERSÖNLICHE ...]` aus `docs/FREIGABE.md` erledigen
    (`grep -rnE "ERSETZEN|PERSÖNLICHE" src` ist leer).
 2. In `src/config.mjs` `live: true` setzen, `npm run build && npm test`, committen.
-3. In Hostinger Git-Deploy aus `main` einrichten, SSL aktivieren. Die `.htaccess` erzwingt
+3. In Hostinger Git-Deploy aus `live` einrichten, SSL aktivieren. Die `.htaccess` erzwingt
    `https://www.`, liefert saubere Adressen, komprimiert und setzt Cache- und Sicherheits-Header.
 4. Google Search Console: `https://www.koenig-gebaeudereinigung.com/sitemap.xml` einreichen.
 
